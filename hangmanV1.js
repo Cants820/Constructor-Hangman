@@ -11,11 +11,7 @@
 //user guess the display word above or fails
 
 
-
-
-
 //load the game
-
 var wordBank = ["vanilla", "chocolate","napoleon", "mocha","macha","mango"];
 var wins = 0;
 var guessLeft = 9;
@@ -34,8 +30,6 @@ function resetGame() {
     Hangman();
   }
 }
-
-
 
 function Letter(randomWord) {
   this.randomWord = randomWord;
@@ -58,7 +52,6 @@ function Letter(randomWord) {
     
 function Word(wordToGuessArray,dashesArray, userInput){
     
-
     if(wordToGuessArray.includes(userInput)){
       console.log("correct letter");
       //console.log(wordsToGuessArray.includes(userInput));
@@ -71,6 +64,7 @@ function Word(wordToGuessArray,dashesArray, userInput){
       // c a t 
       
       dashesArray[index] = removedElement;
+      dashesArray.push()
       // console.log(dashesArray[index] = removedElement);
       // - a -
       console.log(dashesArray);
@@ -84,14 +78,11 @@ function Word(wordToGuessArray,dashesArray, userInput){
       // console.log(correctGuess);
 }
 
-
-
-
 // console.log(newGame.letterMaker());
 //load game  using prompt npm
 // var randomWord = new Letter(wordSelector);
   
- var inquirer = require("inquirer");
+var inquirer = require("inquirer");
 function Hangman() {
 
     inquirer.prompt([
@@ -105,10 +96,8 @@ function Hangman() {
     //console.log(randomWord.dashesMaker());
     //console.log(randomWord.letterMaker());
     // console.log(randomWord.letterMaker());
-
+     console.log(dashesArray);
     Word(newGame.letterMaker(),newGame.dashesMaker(), answer.wordguess);
-    newGame.letterMaker();
-
     // Word(wordsToGuessArray,dashesArray,"a");
     Hangman();
     });
