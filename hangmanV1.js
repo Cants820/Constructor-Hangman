@@ -26,6 +26,17 @@ var dashesArray = [];//turns the random word letters into an array
  // dashesArray = ["_","_","_"];
  // userInput = "a";
 
+function resetGame() {
+  if(guessLeft < 0) {
+     wordToGuessArray =[];
+     dashesArray = [];
+     guessLeft = 9;
+    Hangman();
+  }
+}
+
+
+
 function Letter(randomWord) {
   this.randomWord = randomWord;
   this.letterMaker = function() {
@@ -54,7 +65,7 @@ function Word(wordToGuessArray,dashesArray, userInput){
       //console.log("Correct Guess " + correctGuess);
       //var correctGuess = wordsToGuessArray.splice(index,1,"");
       var index = wordToGuessArray.indexOf(userInput); //returns an index of the guessed number
-      var removedElement = wordToGuessArray[index]; // returns element of the 
+      var removedElement = wordToGuessArray[index]; // returns element of the index array that was chosen
       
       wordToGuessArray[index] = "";
       // c a t 
@@ -63,18 +74,16 @@ function Word(wordToGuessArray,dashesArray, userInput){
       // console.log(dashesArray[index] = removedElement);
       // - a -
       console.log(dashesArray);
-      
-
     } else {
       console.log("Incorrect Letter");
       guessLeft--;
       console.log(guessLeft);
     }
-
       // console.log(correctGuess);//
       //  dashesArray.splice(i,1, correctGuess);
       // console.log(correctGuess);
 }
+
 
 
 
@@ -98,7 +107,7 @@ function Hangman() {
     // console.log(randomWord.letterMaker());
 
     Word(newGame.letterMaker(),newGame.dashesMaker(), answer.wordguess);
-    
+    newGame.letterMaker();
 
     // Word(wordsToGuessArray,dashesArray,"a");
     Hangman();
