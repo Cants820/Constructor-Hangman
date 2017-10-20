@@ -38,43 +38,46 @@ function Letter(randomWord) {
     }
      return wordToGuessArray;
   }
+  this.letterMaker();//this calls the method to set the wordToGuessArray once, when the constructor is called.
   this.dashesMaker = function() {
     for(var i = 0; i < this.randomWord.length;i++){
       dashesArray[i] = "_";
     }
      return dashesArray;
   }
+  this.dashesMaker();//this calls the method to set the global dashesAray once, when the constructor is called, basically initializing the game.
 }
 
 // var newGame1 = new Letter(wordSelector);
 // newGame1.letterMaker();
     
-function Word(wordToGuessArray,dashesArray, userInput){
+function Word(userInput){ // removed the first two parameters here since they were causing a scoping issue - JW
     
-    if(wordToGuessArray.includes(userInput)){
-      console.log("correct letter");
-      //console.log(wordsToGuessArray.includes(userInput));
-      //console.log("Correct Guess " + correctGuess);
-      //var correctGuess = wordsToGuessArray.splice(index,1,"");
-      var index = wordToGuessArray.indexOf(userInput); //returns an index of the guessed number
-      var removedElement = wordToGuessArray[index]; 
-      
-      wordToGuessArray[index] = "";
-      // c a t 
-      
-      dashesArray[index] = removedElement;
+  if(wordToGuessArray.includes(userInput)){
+    console.log("correct letter");
+    //console.log(wordsToGuessArray.includes(userInput));
+    //console.log("Correct Guess " + correctGuess);
+    //var correctGuess = wordsToGuessArray.splice(index,1,"");
+    var index = wordToGuessArray.indexOf(userInput); //returns an index of the guessed number
+    var removedElement = wordToGuessArray[index]; 
+    
+    wordToGuessArray[index] = ""; //this line might prove to be unnecessary later - JW
+    // c a t 
+    
+    dashesArray[index] = removedElement; //this line now changes the global dashesArray so that this change will still be reflected the next time the Word function is called. - JW
+    //could have used dashesArray.splice(index, 1, removedElement);
 
-      // console.log(dashesArray[index] = removedElement);
-      // - a -
-      console.log(dashesArray);
-    } else {
-      console.log("Incorrect Letter");
-      guessLeft--;
-      console.log(guessLeft);
-    }
-      // console.log(correctGuess);//
-      //  dashesArray.splice(i,1, correctGuess);
-      // console.log(correctGuess);
+    // console.log(dashesArray[index] = removedElement);
+    // - a -
+    console.log(dashesArray);
+  } else {
+    console.log("Incorrect Letter");
+    guessLeft--;
+    console.log(guessLeft);
+  }
+    // console.log(correctGuess);//
+    //  dashesArray.splice(i,1, correctGuess);
+    // console.log(correctGuess);
 }
 
 // console.log(newGame.letterMaker());
@@ -93,8 +96,10 @@ function Hangman() {
     //console.log(randomWord.dashesMaker());
     //console.log(randomWord.letterMaker());
     // console.log(randomWord.letterMaker());
-    console.log(dashesArray);
-    Word(newGame.letterMaker(),newGame.dashesMaker(), answer.wordguess);
+    console.log({dashesArray});
+    // console.log(newGame.letterMaker(), newGame.dashesMaker())
+    // Word(newGame.letterMaker(),newGame.dashesMaker(), answer.wordguess);
+    Word(answer.wordguess);
     // Word(wordsToGuessArray,dashesArray,"a");
     Hangman();
     });
